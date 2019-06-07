@@ -12,9 +12,8 @@ module IndexHunter
     end
 
     def chase
-      discover_queries
-      query_sets = QueriesDeconstructor.new(@queries, @klass).get_query_sets
-      @indexes = discover_indexes(query_sets)
+      discover_queries if @discover_queries
+      discover_indexes if @discover_indexes
       begin
         create_indexes
         perform_analysis
@@ -27,33 +26,23 @@ module IndexHunter
 
     private
 
+    # search for queries in project
     def discover_queries
-      if @discover_queries
-        query_finder = QueryFinder.new(@klass, @search_path)
-        query_finder.discover_queries
-        query_finder.replace_variables_in_query_string
-        @queries = query_finder.mocked_queries
-      else
-        @queries
-      end
+      query_finder = QueryFinder.new(@klass, @search_path)
+      query_finder.discover_queries
+      query_finder.replace_variables_in_query_string
+      @queries = query_finder.mocked_queries
     end
 
-    def discover_indexes(query_sets)
-      if @discover_indexes
-        puts "-------------------------"
-        puts "Crunching best indexes........."
-        puts "-------------------------"
-        index_optimiser = IndexOptimiser.new(query_sets, MerchantTransaction)
-        index_optimiser.discover_indexes
-      else
-        @indexes
-      end
+    def discover_indexes
+      Display.user_info("Crunching best indexes.........")
+      query_sets = QueriesDeconstructor.new(@queries, @klass).get_query_sets
+      index_optimiser = IndexOptimiser.new(query_sets, MerchantTransaction)
+      @indexes = index_optimiser.discover_indexes
     end
 
     def create_indexes
-      puts "-------------------------"
-      puts "The answer is 42...Please hold tight while we build your indexes"
-      puts "-------------------------"
+      Display.user_info("The answer is 42...Please hold tight while we build your indexes")
       @index_names = []
       @indexes.each do |index|
         @index_names << IndexBuilder.new(@table_name, index).create_composite

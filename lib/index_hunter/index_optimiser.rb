@@ -65,36 +65,5 @@ module IndexHunter
         end
       end
     end
-    # def find_most_efficient_intersection(matrix)
-    #   binding.pry
-    #   grouped_values = Hash.new{|h, k| h[k] = []}
-    #   matrix.each.with_index(1) do |row, i|
-    #     row.each do |value|
-    #       grouped_values[value] << i
-    #     end
-    #   end
-    #   binding.pry
-    #   grouped_sets = Hash.new{|h, k| h[k] = []}
-    #   grouped_values.each do |value, sets|
-    #     grouped_sets[sets.sort] << value if sets.size > 1
-    #   end
-    #   binding.pry
-    #   grouped_sets
-    # end
-    # def find_most_efficient_intersection(arr)
-    #   common_intersection = arr.reduce{|sub_arr, acc| sub_arr & acc}
-    #   return common_intersection if common_intersection.present?
-    #   smallest_dim = arr.last.size
-    #   least_dim_sub_arrs = arr.select { |sub_arr| sub_arr.size == smallest_dim }
-    #   arr_without_least_dim_sub_arrs = arr - least_dim_sub_arrs
-    #   least_dim_sub_arrs_combinations = least_dim_sub_arrs.combination(least_dim_sub_arrs.size - 1)
-    #   least_dim_sub_arrs_combinations.each do |least_dim_sub_arr_combination|
-    #     arr_minus_one = arr_without_least_dim_sub_arrs
-    #     arr_minus_one += least_dim_sub_arr_combination
-    #     common_intersection = arr_minus_one.reduce{|arr, acc| arr & acc}
-    #     return common_intersection if common_intersection.present?
-    #   end
-    #   find_most_efficient_intersection(arr_without_least_dim_sub_arrs)
-    # end
   end
 end

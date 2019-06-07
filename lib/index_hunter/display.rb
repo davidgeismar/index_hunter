@@ -21,6 +21,12 @@ module IndexHunter
         eval(ask_user_for_input(indexes.to_s))
       end
 
+      def user_info(text)
+        puts "-------------------------"
+        puts text
+        puts "-------------------------"
+      end
+
       def should_keep_index?
         valid = false
         while !valid
