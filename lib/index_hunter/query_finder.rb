@@ -5,7 +5,7 @@ module IndexHunter
 
     ACTIVE_RECORD_QUERIES = ['find', 'find_by', 'find_by!', 'find_by_sql', 'pluck', 'take', 'where', 'order', 'limit', 'offset', 'group', 'select', 'unscope', 'only', 'reorder', 'reverse_order', 'rewhere', 'joins', 'left_outer_joins', 'includes', 'select_all', 'distinct', 'exists?', 'any?', 'many?', 'count', 'minimum', 'maximum', 'sum']
     ACTIVE_RECORD_SQLABLE = ['where', 'order', 'rewhere','order', 'limit', 'offset', 'group', 'select', 'unscope', 'only', 'reorder', 'reverse_order', 'rewhere', 'joins', 'includes', 'select_all', 'distinct']
-    ACTIVE_RECORD_NOT_SQLABLE = ['find', 'find_by', 'find_by!', 'find_by_sql', 'pluck', 'take', 'exists?', 'any?', 'many?', 'count', 'minimum', 'maximum', 'sum']
+    ACTIVE_RECORD_NOT_SQLABLE = [ 'find_by', 'find_by!', 'find_by_sql', 'pluck', 'take', 'exists?', 'any?', 'many?', 'count', 'minimum', 'maximum', 'sum']
     # we will replace those with where to retrieve fields
     ACTIVE_RECORD_HACKABLE = ['find_by', 'find_by!']
 

@@ -1,7 +1,7 @@
 # finds best possible index based on a set of queries
 # BAD REWRITE
 module IndexHunter
-  class IndexOptimiser
+  class IndexDiscoverer
     attr_accessor :query_sets, :klass, :cardinality, :index_suggestions
     def initialize(query_sets, klass)
       @query_sets = query_sets
@@ -18,6 +18,8 @@ module IndexHunter
       @index_suggestions
     end
 
+
+    private
 
     def find_fields_cardinality(fields)
       field_cardinality = {}

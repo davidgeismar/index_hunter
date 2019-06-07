@@ -1,5 +1,6 @@
 # bad name this class will be the base for fetching infos about the queries in your project
 module IndexHunter
+
   class QueriesDeconstructor
     def initialize(queries=[], klass)
       @queries = queries
@@ -22,6 +23,9 @@ module IndexHunter
     def retrieve_query_fields_from_hash
       @queries.each do |query_as_string, query_as_lambda|
         begin
+          # if QueryFinder::ACTIVE_RECORD_NOT_SQLABLE.any? {|ar_method| query_as_string.include?(ar_method)}
+          #   query_as_lambda
+          # end
           if query_as_string.include?("#{@klass}.find_by")
             query_as_string = query_as_string.sub("#{@klass}.find_by", "#{@klass}.where")
             query_as_lambda = -> { eval(query_as_string) }
