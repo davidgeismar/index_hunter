@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'index_hunter'
-  s.version     = '0.0.0'
+  s.version     = '0.0.1'
   # s.executables << 'index_hunter_init'
   s.date        = '2019-06-07'
   s.summary     = "IndexCityHunter ^^"
