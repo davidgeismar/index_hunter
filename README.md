@@ -4,10 +4,10 @@ Index Hunter will automatically parse your ruby code, find your active record qu
 All of that magic in a single sweet gem. 
 You already love index hunter
 
-#GETTING STARTED 
+# GETTING STARTED 
 `IndexHunter::IndexHunter.new(options).chase`
 
-#WHAT CAN YOU PASS AS OPTIONS ?
+# WHAT CAN YOU PASS AS OPTIONS ?
 This is a list of options you can pass to the IndexHunter class :
 - `table_name` : the name of the table on which you wish to work
 - `discover_queries` (default true) wether you want IndexHunter to automatically find queries for the table you passed from your project (index_hunter only supports search on active_record methods)
