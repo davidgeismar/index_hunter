@@ -2,9 +2,10 @@
 module IndexHunter
 
   class QueriesDeconstructor
-    def initialize(queries=[], klass)
+    def initialize(queries=[],orm= :active_record,  klass)
       @queries = queries
       @klass = klass
+      @columns_extractor = "::IndexHunter::ColumnsExtractor::#{orm.classify}".constantize.new(klass)
     end
 
     def get_query_sets
@@ -23,15 +24,8 @@ module IndexHunter
     def retrieve_query_fields_from_hash
       @queries.each do |query_as_string, query_as_lambda|
         begin
-          # if QueryFinder::ACTIVE_RECORD_NOT_SQLABLE.any? {|ar_method| query_as_string.include?(ar_method)}
-          #   query_as_lambda
-          # end
-          if query_as_string.include?("#{@klass}.find_by")
-            query_as_string = query_as_string.sub("#{@klass}.find_by", "#{@klass}.where")
-            query_as_lambda = -> { eval(query_as_string) }
-          end
           # WORKS FOR WHERE clause fucks up with FIND
-          @query_sets << query_as_lambda.call.where_values_hash.keys.map(&:to_sym) if query_as_lambda.call.is_a? ActiveRecord::Relation
+          @query_sets << @columns_extractor.extract_columns(query_ast_string)
         rescue => e
           puts e
         end

@@ -1,5 +1,4 @@
 class IndexOptimizer
-
   def initialize(strategy)
     @strategy = strategy
   end

@@ -40,6 +40,8 @@ module IndexHunter
         keep_index == "Y"
       end
 
+      # def should_perform_
+
       private
 
       def ask_user_for_input(prefill)
