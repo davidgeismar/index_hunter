@@ -2,20 +2,10 @@
 module IndexHunter
   class QueryFinder
     attr_accessor :queries_as_string, :queries_as_lambdas, :mocked_queries_as_string, :mocked_queries_as_lambdas, :queries, :mocked_queries
-
-    ACTIVE_RECORD_QUERIES = ['find', 'find_by', 'find_by!', 'find_by_sql', 'pluck', 'take', 'where', 'order', 'limit', 'offset', 'group', 'select', 'unscope', 'only', 'reorder', 'reverse_order', 'rewhere', 'joins', 'left_outer_joins', 'includes', 'select_all', 'distinct', 'exists?', 'any?', 'many?', 'count', 'minimum', 'maximum', 'sum']
-    ACTIVE_RECORD_SQLABLE = ['where', 'order', 'rewhere','order', 'limit', 'offset', 'group', 'select', 'unscope', 'only', 'reorder', 'reverse_order', 'rewhere', 'joins', 'includes', 'select_all', 'distinct']
-    ACTIVE_RECORD_NOT_SQLABLE = [ 'find_by', 'find_by!', 'find_by_sql', 'pluck', 'take', 'exists?', 'any?', 'many?', 'count', 'minimum', 'maximum', 'sum']
-    # we will replace those with where to retrieve fields
-    ACTIVE_RECORD_HACKABLE = ['find_by', 'find_by!']
-
-    ACTIVE_RECORD_AFTER_GROUP = ['having']
-    ACTIVE_RECORD_AFTER_WHERE = ['not', 'or']
-    # TODO make it better
-    ACTIVE_RECORD_REGEX = "(#{ACTIVE_RECORD_QUERIES.join('|')})\\(.*?\\)"
-    def initialize(klass, root=nil)
+    
+    def initialize(klass, orm=nil, root=nil)
       @klass = klass
-      @regex = /#{@klass}(.#{ACTIVE_RECORD_REGEX})+/mx
+      @regex = /#{@klass}(.#{ORM::orm.to_s.classify.constantize::SEARCH_REGEX})+/mx if orm
       # ORIGINAL QUERIES
       @queries_as_string = []
       @queries_as_lambdas = []
