@@ -2,10 +2,10 @@
 module IndexHunter
   class QueryFinder
     attr_accessor :queries_as_string, :queries_as_lambdas, :mocked_queries_as_string, :mocked_queries_as_lambdas, :queries, :mocked_queries
-    
-    def initialize(klass, orm=nil, root=nil)
+
+    def initialize(klass,root=nil,orm= :active_record)
       @klass = klass
-      @regex = /#{@klass}(.#{ORM::orm.to_s.classify.constantize::SEARCH_REGEX})+/mx if orm
+      @regex = /#{@klass}(.#{"IndexHunter::ORM::#{orm.to_s.classify.constantize}::SEARCH_REGEX".constantize})+/mx if orm
       # ORIGINAL QUERIES
       @queries_as_string = []
       @queries_as_lambdas = []

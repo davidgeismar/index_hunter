@@ -3,8 +3,8 @@
 module IndexHunter
   module OptimizationStrategies
     class FullCoverageStrategy
-      def initialize(query_sets, klass, sort_strategy)
-        @sort_strategy = SortStrategies::CardinalityStrategy.new(query_sets.flatten.uniq)
+      def initialize(query_sets, klass)
+        @sort_strategy = ::IndexHunter::SortStrategies::CardinalityStrategy.new(klass, query_sets.flatten.uniq)
         @klass = klass
         @query_sets = query_sets
       end

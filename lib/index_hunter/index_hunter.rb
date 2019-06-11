@@ -37,8 +37,7 @@ module IndexHunter
     def discover_indexes
       Display.user_info("Crunching best indexes.........")
       query_sets = QueriesDeconstructor.new(@queries, @klass).get_query_sets
-      index_optimiser = IndexDiscoverer.new(query_sets, @klass)
-      @indexes = index_optimiser.discover_indexes
+      @indexes = IndexDiscoverer.new(query_sets, @klass).discover_indexes
     end
 
     def create_indexes

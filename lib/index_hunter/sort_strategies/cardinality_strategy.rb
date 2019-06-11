@@ -1,7 +1,8 @@
 module IndexHunter
-  module OptimizationStrategies
+  module SortStrategies
     class CardinalityStrategy
-      def initialize(columns)
+      def initialize(klass, columns)
+        @klass = klass
         @columns = columns
         @cardinality = find_fields_cardinality
       end
